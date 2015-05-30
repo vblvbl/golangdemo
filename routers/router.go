@@ -1,7 +1,6 @@
 package routers
 import (
 	"net/http"
-
 	"fmt"
 	"log"
 )
@@ -23,5 +22,5 @@ func SayhelloName(w http.ResponseWriter, r *http.Request) {
 func Init() {
 	log.Println("服务器启动：", "端口9090")
 	mux := &MyMux{}
- http.ListenAndServe("9090", mux)
+	http.ListenAndServe("9090", mux)
 }

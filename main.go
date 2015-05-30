@@ -2,10 +2,11 @@ package main
 
 
 import (
-	"godemo/routers"
+
+	"golangdemo/routers"
 )
 
 
 func main() {
-routers.Init()
+	routers.Init()
 }
