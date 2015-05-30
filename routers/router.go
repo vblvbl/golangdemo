@@ -1,26 +1,38 @@
 package routers
 import (
 	"net/http"
-	"fmt"
-	"log"
+
+	"golangdemo/controllers"
+
 )
+
 
 type MyMux struct {
 }
 
 func (p *MyMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	if r.URL.Path == "/hello" {
-		SayhelloName(w, r)
-		return
+	path := r.RequestURI
+	var resp string
+	switch path {
+	case "/hello":
+		resp = "hello"
+	case "/haha":
+		resp = "===="
+	default:
+		resp = "/"
 	}
+	if resp == "/hello" {
+		contollers.SayhelloName(w, r)
+	}
+
+
 	http.NotFound(w, r)
 	return
 }
-func SayhelloName(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello myroute!")
-}
+
+
 func Init() {
-	log.Println("服务器启动：", "端口9090")
 	mux := &MyMux{}
 	http.ListenAndServe("9090", mux)
+
 }
