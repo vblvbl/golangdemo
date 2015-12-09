@@ -5,10 +5,14 @@ import (
 
 	"golangdemo/routers"
 
+	"golangdemo/conf"
+	"fmt"
+	"log"
+	"net/http"
 )
 
 func main() {
-// // Configuration
+	// // Configuration
 	PORT := config.Get("WEBSERVER_PORT")
 
 	// Get the router from router.go
@@ -17,5 +21,5 @@ func main() {
 	//Run HTTP Server
 	fmt.Println("Running WebServer on Port " + PORT)
 
-	log.Fatal(http.ListenAndServe(":"+PORT, router))
+	log.Fatal(http.ListenAndServe(":" + PORT, router))
 }

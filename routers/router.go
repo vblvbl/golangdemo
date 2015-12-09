@@ -1,12 +1,10 @@
 package routers
+
 import (
-	"net/http"
-
-
 	"golangdemo/controllers"
-	"log"
+	"golangdemo/core"
+	"golangdemo/middlewares"
 )
-
 
 // getRouter returns the routers
 func GetRouter() (router *core.Router) {
@@ -14,7 +12,7 @@ func GetRouter() (router *core.Router) {
 
 	// All routes go here
 	router.HandleFunc("/", controllers.SayhelloName)
-	router.HandleFunc("/upload", controllers.UploadFile)
+
 	//Static Controller
 	router.PathPrefix("/").Handler(&controllers.Static{"/static/public", router})
 
