@@ -8,26 +8,18 @@ import (
 )
 
 
-type MyMux struct {
-}
+// getRouter returns the routers
+func GetRouter() (router *core.Router) {
+	router = core.NewRouter()
 
-func (p *MyMux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	path := r.RequestURI
-	switch path {
-	case "/hello":
-		controllers.SayhelloName(w, r)
-	case "/handlecar":
-		controllers.Hadlecar(w, r)
-	default:
-		http.NotFound(w, r)
-	}
+	// All routes go here
+	router.HandleFunc("/", controllers.SayhelloName)
+	router.HandleFunc("/upload", controllers.UploadFile)
+	//Static Controller
+	router.PathPrefix("/").Handler(&controllers.Static{"/static/public", router})
+
+	// All middlewares go here
+	router.AddMiddleware("/", &middlewares.HTTPLogger{})
 
 	return
-}
-
-func Init() {
-	log.Println("服务器器启动成功:","8080端口")
-	mux := &MyMux{}
-	http.ListenAndServe(":8080", mux)
-
 }
