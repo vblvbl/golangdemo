@@ -2,6 +2,7 @@ package utils
 import (
 	"encoding/base64"
 )
+//base64
 
 func Base64Encode(src []byte) []byte {
 	return []byte(base64.StdEncoding.EncodeToString(src))
